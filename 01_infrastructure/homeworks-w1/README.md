@@ -22,11 +22,14 @@ Do the same for "docker run".
 
 Which tag has the following text? - *Automatically remove the container when it exits* 
 
-- `--delete`
-- `--rc`
-- `--rmc`
+- --delete
+- --rc
+- --rmc
 - `--rm`
+  
+Answer:
 
+<img src="images/q1.png" />
 
 ## Question 2. Understanding docker first run 
 
@@ -35,11 +38,14 @@ Now check the python modules that are installed ( use ```pip list``` ).
 
 What is version of the package *wheel* ?
 
-- 0.42.0
+- `0.42.0`
 - 1.0.0
 - 23.0.1
 - 58.1.0
 
+Answer:
+
+<img src="images/q2.png"/>
 
 # Prepare Postgres
 
@@ -63,10 +69,21 @@ Tip: started and finished on 2019-09-18.
 
 Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
 
-- 15767
+- `15767`
 - 15612
 - 15859
 - 89009
+
+Answer:
+
+```sql
+SELECT
+  COUNT(*) AS taxi_trip_2019_09_18
+FROM green_taxi _trips
+WHERE DATE(lpep_pickup_datetime)='2019-09-18';
+```
+As a result, the total trips was `15767`
+
 
 ## Question 4. Longest trip for each day
 
@@ -77,8 +94,22 @@ Tip: For every trip on a single day, we only care about the trip with the longes
 
 - 2019-09-18
 - 2019-09-16
-- 2019-09-26
+- `2019-09-26`
 - 2019-09-21
+
+Answer:
+
+```sql
+SELECT
+  DATE(lpep_pickup_datetime)
+FROM green_taxi_trips
+WHERE trip_distance = (
+  SELECT
+    MAX(trip_distance)
+  FROM green_taxi_trips
+)
+```
+As a result, the longest trip was on `2019-09-26`
 
 
 ## Question 5. Three biggest pick up Boroughs
