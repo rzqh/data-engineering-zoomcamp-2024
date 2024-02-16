@@ -10,17 +10,17 @@ terraform {
 }
 
 provider "google" {
-    credentials = "./keys/my-creds.json"
-    project = "rzqh-data-engineering-zoomcamp" #id project
-    region = "asia-southeast2"
+    credentials = var.credentials
+    project = var.project #id project
+    region = var.region
 }
 
 resource "google_storage_bucket" "auto-expire"{
-    name = "rzqh-de-zoomcamp-bucket"
-    location = "asia-southeast2"
+    name = var.gcs_bucket_name
+    location = var.location
     
     #Optional, but recommended settings:
-    storage_class = "STANDARD"
+    storage_class = var.gcs_storage_class
     uniform_bucket_level_access = true
 
     versioning {
@@ -37,4 +37,8 @@ resource "google_storage_bucket" "auto-expire"{
     }
 
     force_destroy = true
+}
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
 }
