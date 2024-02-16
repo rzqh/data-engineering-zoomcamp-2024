@@ -1,7 +1,5 @@
 # sumber: dokomentasi terraform https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 
-# We strongly recommend using the required_providers block to set the
-# Azure Provider source and version being used
 terraform {
   required_providers {
     google = {
